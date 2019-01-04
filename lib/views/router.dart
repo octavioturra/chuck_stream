@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+
+import 'package:points_rx/views/home.dart';
+import 'package:points_rx/views/detail.dart';
+
+void goToHome(BuildContext context) => Navigator
+  .push(context,
+    MaterialPageRoute(
+      builder: (context) => HomeView()
+    )
+  );
+
+void goToDetail(BuildContext context, String route) => Navigator
+  .push(context,
+    MaterialPageRoute(
+      builder: (context) => DetailView(route)
+    )
+  );
+
+class Router extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) => HomeView();
+}
