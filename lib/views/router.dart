@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:points_rx/views/home.dart';
-import 'package:points_rx/views/detail.dart';
+import 'package:chuck_streams/views/home.dart';
+import 'package:chuck_streams/views/detail.dart';
 
 void goToHome(BuildContext context) => Navigator
   .push(context,

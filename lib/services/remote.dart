@@ -1,8 +1,8 @@
 import "package:http/http.dart" as http;
 import "dart:convert";
 
-import "package:points_rx/models/categories.dart";
-import "package:points_rx/models/joke.dart";
+import "package:chuck_streams/models/categories.dart";
+import "package:chuck_streams/models/joke.dart";
 
 class HttpError extends Error {
   final int statusCode;

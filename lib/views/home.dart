@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:points_rx/managers/categories.dart';
-import 'package:points_rx/models/categories.dart';
-import 'package:points_rx/views/router.dart';
+import 'package:chuck_streams/managers/categories.dart';
+import 'package:chuck_streams/models/categories.dart';
+import 'package:chuck_streams/views/router.dart';
 
 class HomeView extends StatelessWidget {
   Widget buildContent(List<String> categories) => ListView.builder(

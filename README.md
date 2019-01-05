@@ -1,4 +1,4 @@
-# points_rx
+# chuck_streams
 
 A new Flutter project.
 

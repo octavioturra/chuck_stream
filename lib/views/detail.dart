@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:points_rx/models/joke.dart';
-import 'package:points_rx/managers/joke.dart';
-import 'package:points_rx/services/remote.dart' as remote;
+import 'package:chuck_streams/models/joke.dart';
+import 'package:chuck_streams/managers/joke.dart';
+import 'package:chuck_streams/services/remote.dart' as remote;
 
 class DetailView extends StatelessWidget {
   final String category;

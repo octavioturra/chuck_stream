@@ -1,6 +1,6 @@
 import "dart:async";
-import "package:points_rx/models/joke.dart";
-import "package:points_rx/services/remote.dart" as remote;
+import "package:chuck_streams/models/joke.dart";
+import "package:chuck_streams/services/remote.dart" as remote;
 
 class JokeManager {
   StreamController _controller = new StreamController<Joke>.broadcast();

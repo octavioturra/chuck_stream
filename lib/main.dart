@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:points_rx/views/router.dart';
+import 'package:chuck_streams/views/router.dart';
 
 void main() => runApp(new MyApp());
 

@@ -1,6 +1,6 @@
 import "dart:async";
-import "package:points_rx/models/categories.dart";
-import "package:points_rx/services/remote.dart" as remote;
+import "package:chuck_streams/models/categories.dart";
+import "package:chuck_streams/services/remote.dart" as remote;
 
 class CategoriesManager {
   final Stream<Categories> categories = remote
