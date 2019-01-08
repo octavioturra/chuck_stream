@@ -13,7 +13,7 @@ class JokeManager {
   }
 
   void getJoke(String category) async {
-    _controller.add(Envelope(state: EnvelopeState.Loading));
+    _controller.add(Envelope(state: EnvelopeState.Loading, data: Joke.empty()));
 
     Stream<Envelope<Joke>> jokeStream = remote
         .getResource<Joke>("random?category=$category", Joke.fromJson)

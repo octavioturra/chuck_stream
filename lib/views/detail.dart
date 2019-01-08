@@ -14,12 +14,6 @@ class DetailView extends StatelessWidget {
   }
 
   Widget buildContent(BuildContext context, Joke joke) {
-    if (joke?.id?.length == 0) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return Container(
       padding: EdgeInsets.all(20.0),
       child: Column(
@@ -71,6 +65,12 @@ class DetailView extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<Envelope<Joke>> snapShot) {
               if (snapShot.hasError) {
                 return Text("deu ruim...${snapShot.error}");
+              }
+
+              if (snapShot.hasData && (snapShot.hasData && snapShot.data.state == EnvelopeState.Loading)) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               }
 
               return StreamLoader(
