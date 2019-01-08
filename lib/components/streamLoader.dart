@@ -11,21 +11,15 @@ class StreamLoader extends StatelessWidget {
   });
   
   @override
-  Widget build() {
-    if (snapShot.hasError) {
-      return Text("deu ruim...${snapShot.error}");
-    }
-
+  Widget build(BuildContext build) {
     switch (snapShot.connectionState) {
-      case ConnectionState.waiting:
-        return Text("preparando...");
       case ConnectionState.active:
       case ConnectionState.done:
-        return (snapShot.hasData)
-            ? child
-            : Text("miou...");
+        return child;
+      case ConnectionState.waiting:
       case ConnectionState.none:
-        return Text("vazio...");
+      default:
+        return loader;
     }
   }
 }

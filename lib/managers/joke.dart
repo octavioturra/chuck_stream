@@ -1,22 +1,24 @@
 import "dart:async";
 import "package:chuck_streams/models/joke.dart";
 import "package:chuck_streams/services/remote.dart" as remote;
+import 'package:chuck_streams/models/envelope.dart';
 
 class JokeManager {
-  StreamController _controller = new StreamController<Joke>.broadcast();
+  StreamController _controller = new StreamController<Envelope<Joke>>.broadcast();
 
-  Stream<Joke> jokes;
+  Stream<Envelope<Joke>> jokes;
 
   JokeManager() {
     jokes = _controller.stream;
   }
 
   void getJoke(String category) async {
-    _controller.add(Joke.empty());
+    _controller.add(Envelope(state: EnvelopeState.Loading));
 
-    Stream<Joke> jokeStream = remote
+    Stream<Envelope<Joke>> jokeStream = remote
         .getResource<Joke>("random?category=$category", Joke.fromJson)
-        .asStream();
+        .asStream()
+        .map((j) => Envelope<Joke>(state: EnvelopeState.Success, data: j));
 
     await _controller.addStream(jokeStream);
   }

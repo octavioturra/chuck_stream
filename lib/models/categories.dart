@@ -1,4 +1,6 @@
-class Categories {
+import 'package:chuck_streams/models/model.dart';
+
+class Categories extends Model {
   List<String> categories;
 
   Categories(this.categories);

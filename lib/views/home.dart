@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:chuck_streams/managers/categories.dart';
 import 'package:chuck_streams/models/categories.dart';
 import 'package:chuck_streams/views/router.dart';
+import 'package:chuck_streams/models/envelope.dart';
+
+import 'package:chuck_streams/components/streamLoader.dart';
 
 class HomeView extends StatelessWidget {
   Widget buildContent(List<String> categories) => ListView.builder(
@@ -21,16 +24,15 @@ class HomeView extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream: CategoriesManager().categories,
-        builder: (BuildContext context, AsyncSnapshot<Categories> snapShot) {
+        builder: (BuildContext context, AsyncSnapshot<Envelope<Categories>> snapShot) {
           if (snapShot.hasError) {
             return Text("deu ruim...${snapShot.error}");
           }
-          switch(snapShot.connectionState) {
-            case ConnectionState.waiting: return Text("preparando...");
-            case ConnectionState.active:
-            case ConnectionState.done: return (snapShot.hasData) ? buildContent(snapShot.data.categories) : Text("miou...");
-            case ConnectionState.none: return Text("vazio...");
-          }
+
+          return StreamLoader(
+            snapShot,
+            child: (snapShot.hasData) ? buildContent(snapShot.data.data.categories) : Text("miou...")
+          );
         }
       )
     );

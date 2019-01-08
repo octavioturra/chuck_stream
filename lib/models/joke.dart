@@ -1,4 +1,6 @@
-class Joke {
+import 'package:chuck_streams/models/model.dart';
+
+class Joke extends Model {
   final String iconUrl;
   final String id;
   final String url;

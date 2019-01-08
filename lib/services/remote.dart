@@ -1,9 +1,6 @@
 import "package:http/http.dart" as http;
 import "dart:convert";
 
-import "package:chuck_streams/models/categories.dart";
-import "package:chuck_streams/models/joke.dart";
-
 class HttpError extends Error {
   final int statusCode;
   HttpError(this.statusCode) : super();
@@ -25,17 +22,3 @@ Future<T> getResource<T>(String resource, Handler handler, { String endpoint = d
   .then(handleError)
   .then((v) => json.decode(v.body))
   .then(handler);
-
-Stream<Categories> fetchCategories() => http
-  .get("https://api.chucknorris.io/jokes/categories")
-  .then(handleError)
-  .then((v) => json.decode(v.body))
-  .then((c) =>  Categories.fromJson(c))
-  .asStream();
-
-Stream<Joke> fetchJoke(String category) => http
-  .get("https://api.chucknorris.io/jokes/random?category=$category")
-  .then(handleError)
-  .then((v) => json.decode(v.body))
-  .then((j) => Joke.fromJson(j))
-  .asStream();

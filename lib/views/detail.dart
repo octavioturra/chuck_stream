@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:chuck_streams/models/joke.dart';
 import 'package:chuck_streams/managers/joke.dart';
-import 'package:chuck_streams/services/remote.dart' as remote;
+import 'package:chuck_streams/components/streamLoader.dart';
+import 'package:chuck_streams/components/defaultLoader.dart';
+import 'package:chuck_streams/models/envelope.dart';
 
 class DetailView extends StatelessWidget {
   final String category;
@@ -58,7 +60,7 @@ class DetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('${this.category}\'s joke '),
+          title: Text('Piada em ${this.category}'),
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           textTheme: TextTheme(title: TextStyle(color: Colors.black87)),
@@ -66,22 +68,18 @@ class DetailView extends StatelessWidget {
         ),
         body: StreamBuilder(
             stream: manager.jokes,
-            builder: (BuildContext context, AsyncSnapshot<Joke> snapShot) {
+            builder: (BuildContext context, AsyncSnapshot<Envelope<Joke>> snapShot) {
               if (snapShot.hasError) {
                 return Text("deu ruim...${snapShot.error}");
               }
 
-              switch (snapShot.connectionState) {
-                case ConnectionState.waiting:
-                  return Text("preparando...");
-                case ConnectionState.active:
-                case ConnectionState.done:
-                  return (snapShot.hasData)
-                      ? buildContent(context, snapShot.data)
-                      : Text("miou...");
-                case ConnectionState.none:
-                  return Text("vazio...");
-              }
+              return StreamLoader(
+                snapShot,
+                loader: DefaultLoader(message: "Carregando piada de '$category'"),
+                child: (snapShot.hasData)
+                      ? buildContent(context, snapShot.data.data)
+                      : Text("miou...")
+              );
             }));
   }
 }
